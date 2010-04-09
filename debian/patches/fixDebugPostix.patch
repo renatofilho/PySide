@@ -1,0 +1,122 @@
+Description: Includes the postfixes in the install target (allows debug build)
+Author: Didier Raboud <didier@raboud.com>
+Origin: vendor
+Forwarded: no (to be done)
+Last-Update: 2010-03-26
+
+Index: pyside-shiboken/PySide/QtCore/CMakeLists.txt
+===================================================================
+--- pyside-shiboken.orig/PySide/QtCore/CMakeLists.txt	2010-03-24 09:44:25.000000000 +0100
++++ pyside-shiboken/PySide/QtCore/CMakeLists.txt	2010-03-24 09:44:42.000000000 +0100
+@@ -149,7 +149,7 @@
+                       )
+ 
+ # install
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtCore.so
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtCore${CMAKE_DEBUG_POSTFIX}.so
+         DESTINATION ${SITE_PACKAGE}/${BINDING_NAME})
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/PySide/QtCore/pyside_qtcore_python.h
+         DESTINATION include/PySide/QtCore/)
+Index: pyside-shiboken/PySide/QtNetwork/CMakeLists.txt
+===================================================================
+--- pyside-shiboken.orig/PySide/QtNetwork/CMakeLists.txt	2010-03-24 09:44:25.000000000 +0100
++++ pyside-shiboken/PySide/QtNetwork/CMakeLists.txt	2010-03-24 09:45:34.000000000 +0100
+@@ -113,7 +113,7 @@
+ add_dependencies(QtNetwork QtCore)
+ 
+ # install
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtNetwork.so
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtNetwork${CMAKE_DEBUG_POSTFIX}.so
+         DESTINATION ${SITE_PACKAGE}/PySide)
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/PySide/QtNetwork/pyside_qtnetwork_python.h
+         DESTINATION include/PySide/QtNetwork/)
+Index: pyside-shiboken/PySide/QtSvg/CMakeLists.txt
+===================================================================
+--- pyside-shiboken.orig/PySide/QtSvg/CMakeLists.txt	2010-03-24 09:44:25.000000000 +0100
++++ pyside-shiboken/PySide/QtSvg/CMakeLists.txt	2010-03-24 09:45:59.000000000 +0100
+@@ -56,7 +56,7 @@
+ add_dependencies(QtSvg QtGui)
+ 
+ # install
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtSvg.so
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtSvg${CMAKE_DEBUG_POSTFIX}.so
+         DESTINATION ${SITE_PACKAGE}/PySide)
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/PySide/QtSvg/pyside_qtsvg_python.h
+         DESTINATION include/PySide/QtSvg/)
+Index: pyside-shiboken/PySide/QtWebKit/CMakeLists.txt
+===================================================================
+--- pyside-shiboken.orig/PySide/QtWebKit/CMakeLists.txt	2010-03-24 09:44:25.000000000 +0100
++++ pyside-shiboken/PySide/QtWebKit/CMakeLists.txt	2010-03-24 09:46:15.000000000 +0100
+@@ -73,7 +73,7 @@
+ add_dependencies(QtWebKit QtNetwork)
+ 
+ # install
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtWebKit.so
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtWebKit${CMAKE_DEBUG_POSTFIX}.so
+         DESTINATION ${SITE_PACKAGE}/PySide)
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/PySide/QtWebKit/pyside_qtwebkit_python.h
+         DESTINATION include/PySide/QtWebKit/)
+Index: pyside-shiboken/PySide/QtGui/CMakeLists.txt
+===================================================================
+--- pyside-shiboken.orig/PySide/QtGui/CMakeLists.txt	2010-03-24 09:44:54.000000000 +0100
++++ pyside-shiboken/PySide/QtGui/CMakeLists.txt	2010-03-24 09:45:29.000000000 +0100
+@@ -478,6 +478,6 @@
+ add_dependencies(QtGui QtCore)
+ 
+ # install
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtGui.so DESTINATION "${SITE_PACKAGE}/PySide")
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtGui${CMAKE_DEBUG_POSTFIX}.so DESTINATION "${SITE_PACKAGE}/PySide")
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/PySide/QtGui/pyside_qtgui_python.h
+         DESTINATION include/PySide/QtGui/)
+Index: pyside-shiboken/PySide/QtOpenGL/CMakeLists.txt
+===================================================================
+--- pyside-shiboken.orig/PySide/QtOpenGL/CMakeLists.txt	2010-03-24 09:44:54.000000000 +0100
++++ pyside-shiboken/PySide/QtOpenGL/CMakeLists.txt	2010-03-24 09:45:45.000000000 +0100
+@@ -45,7 +45,7 @@
+ add_dependencies(QtOpenGL QtGui)
+ 
+ # install
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtOpenGL.so
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtOpenGL${CMAKE_DEBUG_POSTFIX}.so
+         DESTINATION ${SITE_PACKAGE}/PySide)
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/PySide/QtOpenGL/pyside_qtopengl_python.h
+         DESTINATION include/PySide/QtOpenGL/)
+Index: pyside-shiboken/PySide/QtSql/CMakeLists.txt
+===================================================================
+--- pyside-shiboken.orig/PySide/QtSql/CMakeLists.txt	2010-03-24 09:44:54.000000000 +0100
++++ pyside-shiboken/PySide/QtSql/CMakeLists.txt	2010-03-24 09:45:53.000000000 +0100
+@@ -45,7 +45,7 @@
+ add_dependencies(QtSql QtGui)
+ 
+ # install
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtSql.so
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtSql${CMAKE_DEBUG_POSTFIX}.so
+         DESTINATION ${SITE_PACKAGE}/PySide)
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/PySide/QtSql/pyside_qtsql_python.h
+         DESTINATION include/PySide/QtSql/)
+Index: pyside-shiboken/PySide/QtTest/CMakeLists.txt
+===================================================================
+--- pyside-shiboken.orig/PySide/QtTest/CMakeLists.txt	2010-03-24 09:44:54.000000000 +0100
++++ pyside-shiboken/PySide/QtTest/CMakeLists.txt	2010-03-24 09:46:11.000000000 +0100
+@@ -45,7 +45,7 @@
+ add_dependencies(QtTest QtGui)
+ 
+ # install
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtTest.so
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtTest${CMAKE_DEBUG_POSTFIX}.so
+         DESTINATION ${SITE_PACKAGE}/PySide)
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/PySide/QtTest/pyside_qttest_python.h
+         DESTINATION include/PySide/QtTest/)
+Index: pyside-shiboken/PySide/QtXml/CMakeLists.txt
+===================================================================
+--- pyside-shiboken.orig/PySide/QtXml/CMakeLists.txt	2010-03-24 09:44:54.000000000 +0100
++++ pyside-shiboken/PySide/QtXml/CMakeLists.txt	2010-03-24 09:46:27.000000000 +0100
+@@ -59,7 +59,7 @@
+ add_dependencies(QtXml QtCore)
+ 
+ # install
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtXml.so DESTINATION ${SITE_PACKAGE}/PySide)
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtXml${CMAKE_DEBUG_POSTFIX}.so DESTINATION ${SITE_PACKAGE}/PySide)
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/PySide/QtXml/pyside_qtxml_python.h
+         DESTINATION include/PySide/QtXml/)
+ 

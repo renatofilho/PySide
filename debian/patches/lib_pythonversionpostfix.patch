@@ -1,0 +1,32 @@
+Description: Includes the -py2* postfix to the libraries. This allows to build
+ against all python versions.
+Author: Didier Raboud <didier@raboud.com>
+Origin: vendor
+Forwarded: no (not wanted / needed)
+Last-Update: 2010-03-26
+
+Index: pyside-shiboken/libpyside/CMakeLists.txt
+===================================================================
+--- pyside-shiboken.orig/libpyside/CMakeLists.txt	2010-03-24 09:50:11.000000000 +0100
++++ pyside-shiboken/libpyside/CMakeLists.txt	2010-03-24 09:51:37.000000000 +0100
+@@ -6,6 +6,11 @@
+ globalreceiver.cpp
+ )
+ 
++SET(OLD_CMAKE_DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
++SET(OLD_CMAKE_RELEASE_POSTFIX ${CMAKE_RELEASE_POSTFIX})
++SET(CMAKE_DEBUG_POSTFIX ${LIBPYSIDE_POSTFIX}${CMAKE_DEBUG_POSTFIX})
++SET(CMAKE_RELEASE_POSTFIX ${LIBPYSIDE_POSTFIX}${CMAKE_RELEASE_POSTFIX})
++
+ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
+                     ${SHIBOKEN_INCLUDE_DIR}
+                     ${PYTHON_INCLUDE_PATH}
+@@ -47,3 +52,8 @@
+         DESTINATION "${LIB_INSTALL_DIR}/cmake/PySide-${BINDING_API_VERSION}")
+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/PySideVersion.cmake"
+         DESTINATION "${LIB_INSTALL_DIR}/cmake/PySide-${BINDING_API_VERSION}")
++
++SET(CMAKE_DEBUG_POSTFIX ${OLD_CMAKE_DEBUG_POSTFIX})
++SET(CMAKE_RELEASE_POSTFIX ${OLD_CMAKE_RELEASE_POSTFIX})
++UNSET(OLD_CMAKE_DEBUG_POSTFIX)
++UNSET(OLD_CMAKE_RELEASE_POSTFIX)

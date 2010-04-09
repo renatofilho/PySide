@@ -1,0 +1,21 @@
+Description: Fix convenience symlinks used during install by appending the
+ POSTFIXes to them. This permits debug build.
+Author: Didier Raboud <didier@raboud.com>
+Origin: vendor
+Forwarded: no (to be done)
+
+Index: pyside-shiboken/PySide/CMakeLists.txt
+===================================================================
+--- pyside-shiboken.orig/PySide/CMakeLists.txt	2010-02-15 14:57:40.000000000 +0100
++++ pyside-shiboken/PySide/CMakeLists.txt	2010-02-15 15:00:01.000000000 +0100
+@@ -20,8 +20,8 @@
+ macro(HAS_QT_MODULE var name)
+ IF (${var})
+     add_subdirectory(${name})
+-    execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_CURRENT_BINARY_DIR}/${name}/${name}${CMAKE_SHARED_MODULE_SUFFIX}"
+-                                                               "${CMAKE_BINARY_DIR}/PySide/${name}${CMAKE_SHARED_MODULE_SUFFIX}")
++    execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_CURRENT_BINARY_DIR}/${name}/${name}${CMAKE_DEBUG_POSTFIX}${CMAKE_SHARED_MODULE_SUFFIX}"
++                                                               "${CMAKE_BINARY_DIR}/PySide/${name}${CMAKE_DEBUG_POSTFIX}${CMAKE_SHARED_MODULE_SUFFIX}")
+ else()
+     message(STATUS "${name} NOT found. ${name} support disabled.")
+ endif()

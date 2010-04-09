@@ -1,0 +1,3 @@
+fixConvenienceSymlinks.patch
+fixDebugPostix.patch
+lib_pythonversionpostfix.patch
