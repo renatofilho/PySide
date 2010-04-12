@@ -20,6 +20,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
 	 pyside-qt4-core (>= ${binary:Version}),
 	 pyside-qt4-gui (>= ${binary:Version}),
 	 pyside-qt4-help (>= ${binary:Version}),
+	 pyside-qt4-multimedia (>= ${binary:Version}),
 	 pyside-qt4-network (>= ${binary:Version}),
 	 pyside-qt4-opengl (>= ${binary:Version}),
 	 pyside-qt4-script (>= ${binary:Version}),
@@ -102,6 +103,16 @@ Description: Qt 4 help module - Python bindings
  is its rich set of widgets that provide standard GUI functionality.
  .
  This package provides Python bindings for the QtHelp module.
+
+Package: pyside-qt4-multimedia
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}
+Provides: ${python:Provides}
+Description: Qt 4 multimedia module - Python bindings
+ Qt is a cross-platform C++ application framework. Qt's primary feature
+ is its rich set of widgets that provide standard GUI functionality.
+ .
+ This package provides Python bindings for the QtMultimedia module.
 
 Package: pyside-qt4-network
 Architecture: any
