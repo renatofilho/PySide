@@ -85,9 +85,6 @@
   <rejection class="" function-name="qSharedPointerConstCast"/>
   <rejection class="" function-name="qSharedPointerCast"/>
   <rejection class="" function-name="qWeakPointerCast"/>
-  <rejection class="" function-name="qDebug"/>
-  <rejection class="" function-name="qFatal"/>
-  <rejection class="" function-name="qCritical"/>
   <rejection class="" function-name="qAbs"/>
   <rejection class="" function-name="qErrnoWarning"/>
   <rejection class="" function-name="qstrcpy"/>
@@ -133,7 +130,6 @@
   <rejection class="" function-name="qDrawWinButton"/>
   <rejection class="" function-name="qDrawWinPanel"/>
   <rejection class="" function-name="qEqual"/>
-  <rejection class="" function-name="qFatal"/>
   <rejection class="" function-name="qFill"/>
   <rejection class="" function-name="qFind"/>
   <rejection class="" function-name="qFindChild"/>
@@ -268,7 +264,6 @@
   <rejection class="" function-name="qVariantSetValue"/>
   <rejection class="" function-name="qVariantValue"/>
   <rejection class="" function-name="qvsnprintf"/>
-  <rejection class="" function-name="qWarning"/>
   <rejection class="QThreadPool"/>
   <!-- From Qt4.6 -->
   <rejection class="*" field-name="d_ptr"/>
@@ -994,6 +989,12 @@
         #endif
     </inject-code>
 
+    <!-- the number(qlonglong) is enough for python -->
+    <modify-function signature="number(uint,int)" remove="all" />
+    <modify-function signature="number(int,int)" remove="all" />
+    <modify-function signature="number(ulong,int)" remove="all" />
+    <modify-function signature="number(qlonglong,int)" remove="all" />
+    <modify-function signature="number(qulonglong,int)" remove="all" />
     <modify-function signature="insert(int,const QChar*,int)" remove="all" />
     <modify-function signature="QString(const QChar*, int)" remove="all" />
     <modify-function signature="fromStdString(std::string)" remove="all"/>
