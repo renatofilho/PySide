@@ -24,6 +24,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
 	 pyside-qt4-network (>= ${binary:Version}),
 	 pyside-qt4-opengl (>= ${binary:Version}),
 	 pyside-qt4-script (>= ${binary:Version}),
+	 pyside-qt4-scripttools (>= ${binary:Version}),
 	 pyside-qt4-sql (>= ${binary:Version}),
 	 pyside-qt4-svg (>= ${binary:Version}),
 	 pyside-qt4-uitools (>= ${binary:Version}),
@@ -45,6 +46,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
 	 pyside-qt4-network (>= ${binary:Version}) |
 	 pyside-qt4-opengl (>= ${binary:Version}) |
 	 pyside-qt4-script (>= ${binary:Version}) |
+	 pyside-qt4-scripttools (>= ${binary:Version}) |
 	 pyside-qt4-sql (>= ${binary:Version}) |
 	 pyside-qt4-svg (>= ${binary:Version}) |
 	 pyside-qt4-uitools (>= ${binary:Version}) |
