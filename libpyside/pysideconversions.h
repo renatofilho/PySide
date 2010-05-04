@@ -68,9 +68,9 @@ struct QtDictConverter
         typename QtDict::const_iterator it = cppobj.begin();
 
         for (; it != cppobj.end(); ++it) {
-            PyDict_SetItem(result,
-                           Shiboken::Converter<typename QtDict::key_type>::toPython(it.key()),
-                           Shiboken::Converter<typename QtDict::mapped_type>::toPython(it.value()));
+            Shiboken::AutoDecRef keyObj(Shiboken::Converter<typename QtDict::key_type>::toPython(it.key()));
+            Shiboken::AutoDecRef valueObj(Shiboken::Converter<typename QtDict::mapped_type>::toPython(it.value()));
+            PyDict_SetItem(result, keyObj, valueObj);
         }
 
         return result;
@@ -88,6 +88,76 @@ struct QtDictConverter
 
         while (PyDict_Next(pyobj, &pos, &key, &value))
             result[Shiboken::Converter<typename QtDict::key_type>::toCpp(key)] = Shiboken::Converter<typename QtDict::mapped_type>::toCpp(value);
+        return result;
+    }
+};
+
+template <typename MultiMap>
+struct QtMultiMapConverter
+{
+    static inline bool isConvertible(PyObject* pyObj)
+    {
+        if (PyObject_TypeCheck(pyObj, Shiboken::SbkType<MultiMap>()))
+            return true;
+
+        if ((Shiboken::SbkType<MultiMap>() && Shiboken::isShibokenType(pyObj)) || !PyDict_Check(pyObj))
+            return false;
+
+        PyObject* key;
+        PyObject* value;
+        Py_ssize_t pos = 0;
+
+        while (PyDict_Next(pyObj, &pos, &key, &value)) {
+            if (!Shiboken::Converter<typename MultiMap::key_type>::isConvertible(key)) {
+                if (PySequence_Check(value)) {
+                    for (int i = 0, max = PySequence_Length(value); i < max; ++i) {
+                        Shiboken::AutoDecRef item(PySequence_GetItem(value, i));
+                        if (!Shiboken::Converter<typename MultiMap::mapped_type>::isConvertible(value))
+                            return false;
+                    }
+                } else if (!Shiboken::Converter<typename MultiMap::mapped_type>::isConvertible(value)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    static inline PyObject* toPython(const MultiMap& cppObj)
+    {
+        PyObject* result = PyDict_New();
+        typename MultiMap::const_iterator it = cppObj.begin();
+
+        for (; it != cppObj.end(); ++it) {
+            Shiboken::AutoDecRef key(Shiboken::Converter<typename MultiMap::key_type>::toPython(it.key()));
+            Shiboken::AutoDecRef value(Shiboken::Converter<typename MultiMap::mapped_type>::toPython(it.value()));
+
+            PyObject* values = PyDict_GetItem(result, key);
+            bool decRefValues = !values;
+            if (!values)
+                values = PyList_New(0);
+            PyList_Append(values, value);
+            PyDict_SetItem(result, key, values);
+            if (decRefValues) {
+                Py_DECREF(values);
+            }
+        }
+
+        return result;
+    }
+    static inline MultiMap toCpp(PyObject* pyObj)
+    {
+        if (PyObject_TypeCheck(pyObj, Shiboken::SbkType<MultiMap>()))
+            return *reinterpret_cast<MultiMap*>(Shiboken::getCppPointer(pyObj, Shiboken::SbkType<MultiMap>()));
+
+        MultiMap result;
+
+        PyObject* key;
+        PyObject* value;
+        Py_ssize_t pos = 0;
+
+        while (PyDict_Next(pyObj, &pos, &key, &value))
+            result[Shiboken::Converter<typename MultiMap::key_type>::toCpp(key)] = Shiboken::Converter<typename MultiMap::mapped_type>::toCpp(value);
         return result;
     }
 };
@@ -123,9 +193,10 @@ struct QSequenceConverter
         if (PyObject_TypeCheck(pyobj, Shiboken::SbkType<T>()))
             return *reinterpret_cast<T*>(Shiboken::getCppPointer(pyobj, Shiboken::SbkType<T>()));
 
+        Shiboken::AutoDecRef fastSequence(PySequence_Fast(pyobj, "Invalid sequence object"));
         T result;
         for (int i = 0; i < PySequence_Size(pyobj); i++) {
-            PyObject* pyItem = PySequence_GetItem(pyobj, i);
+            PyObject* pyItem = PySequence_Fast_GET_ITEM(fastSequence.object(), i);
             result << Shiboken::Converter<typename T::value_type>::toCpp(pyItem);
         }
         return result;

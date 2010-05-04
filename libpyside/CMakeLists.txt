@@ -19,7 +19,7 @@ target_link_libraries(pyside
 
 set_target_properties(pyside PROPERTIES
                       VERSION ${BINDING_API_VERSION}
-                      SOVERSION ${BINDING_API_MAJOR_VERSION})
+                      SOVERSION "${BINDING_API_MAJOR_VERSION}.${BINDING_API_MINOR_VERSION}")
 
 #
 # install stuff
@@ -28,6 +28,7 @@ set_target_properties(pyside PROPERTIES
 set(libpyside_HEADERS
     dynamicqmetaobject.h
     globalreceiver.h
+    pysideconversions.h
     pysidemacros.h
     signalmanager.h
 )
