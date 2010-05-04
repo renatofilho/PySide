@@ -6,7 +6,7 @@ XSBC-Original-Maintainer: Debian Python Modules Team <python-modules-team@lists.
 Build-Depends: debhelper, cmake (>= 2.6.0),
 	python-all-dev (>= 2.3.5-11), python-all-dbg (>= 2.3.5-11), python-support (>= 0.3.9),
 	libqt4-dev, libphonon-dev , libqt4-opengl-dev,
-	shiboken (>= 0.2.0), generatorrunner (>= 0.4.0), libshiboken-dev (>= 0.2.0)
+	shiboken (>= 0.3.1), generatorrunner (>= 0.4.2), libshiboken-dev (>= 0.3.1)
 Standards-Version: 3.8.4
 XS-Python-Version: >= 2.5
 Vcs-Svn: svn://svn.debian.org/python-modules/packages/pyside/trunk/
@@ -24,7 +24,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
 	 pyside-qt4-network (>= ${binary:Version}),
 	 pyside-qt4-opengl (>= ${binary:Version}),
 	 pyside-qt4-script (>= ${binary:Version}),
-	 pyside-qt4-scripttools (>= ${binary:Version}),
 	 pyside-qt4-sql (>= ${binary:Version}),
 	 pyside-qt4-svg (>= ${binary:Version}),
 	 pyside-qt4-uitools (>= ${binary:Version}),
@@ -46,21 +45,20 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
 	 pyside-qt4-network (>= ${binary:Version}) |
 	 pyside-qt4-opengl (>= ${binary:Version}) |
 	 pyside-qt4-script (>= ${binary:Version}) |
-	 pyside-qt4-scripttools (>= ${binary:Version}) |
 	 pyside-qt4-sql (>= ${binary:Version}) |
 	 pyside-qt4-svg (>= ${binary:Version}) |
 	 pyside-qt4-uitools (>= ${binary:Version}) |
 	 pyside-qt4-webkit (>= ${binary:Version}) |
 	 pyside-qt4-xml (>= ${binary:Version}) |
 	 pyside-qt4-xmlpatterns (>= ${binary:Version}) |
-	 libpyside0 (>= ${binary:Version})
+	 libpyside0.3 (>= ${binary:Version})
 Description: Python bindings for Qt 4 (debug symbols)
  Qt is a cross-platform C++ application framework. Qt's primary feature
  is its rich set of widgets that provide standard GUI functionality.
  .
  This package contains the debugging symbols.
 
-Package: libpyside0
+Package: libpyside0.3
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}
 Description: Python bindings for Qt 4 (base files)

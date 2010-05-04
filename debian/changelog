@@ -1,3 +1,11 @@
+pyside (0.3.1-1) unstable; urgency=low
+
+  * Update to 0.3.1
+  * libshiboken0 renamed to libshiboken0.3 to reflect new SOVERSION
+  * Added missing modules (QtScript, QtScriptTools, Phonon)
+
+ -- Lauro Neto <lauro.neto@openbossa.org>  Tue, 04 May 2010 17:14:41 -0300
+
 pyside (0.3.0-1pyside0~ppa4) karmic; urgency=low
 
   * Add generatorrunner and libshiboken-dev to Build-Depends.
